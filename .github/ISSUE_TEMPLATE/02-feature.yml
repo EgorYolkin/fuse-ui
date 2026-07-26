@@ -1,0 +1,47 @@
+name: Feature request
+description: Propose a component, API, or design-system improvement
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Explain the consumer problem before proposing an API. Product-specific components are outside the scope of this UI kit.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What consumer need or limitation should Fuse UI address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the API, behavior, and visual or accessibility considerations.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Include workarounds or existing components that are close to the desired behavior.
+    validations:
+      required: false
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or references
+      description: Add code, screenshots, or links that clarify the proposal.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Submission checks
+      options:
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
+        - label: This proposal is reusable and not tied to one product.
+          required: true
+        - label: I agree to follow the Code of Conduct.
+          required: true

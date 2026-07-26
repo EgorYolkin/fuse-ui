@@ -20,7 +20,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     dts({
-      entryRoot: "src",
+      entryRoot: path.resolve(__dirname, "src"),
       include: ["src"],
       outDir: "dist/types",
       tsconfigPath: "./tsconfig.json",

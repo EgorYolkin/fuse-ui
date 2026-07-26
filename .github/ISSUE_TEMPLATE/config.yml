@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/EgorYolkin/fuse-ui/security/advisories/new
+    about: Report vulnerabilities privately. Do not open a public issue.
+  - name: Support policy
+    url: https://github.com/EgorYolkin/fuse-ui/blob/main/SUPPORT.md
+    about: Read the support policy before opening an issue.

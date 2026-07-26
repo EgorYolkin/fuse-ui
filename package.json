@@ -1,25 +1,35 @@
 {
   "name": "@egoryolkin/fuse-ui",
   "version": "0.1.0",
-  "description": "A technical, editorial React UI kit by Egor Yolkin.",
+  "description": "A technical, editorial React UI kit with accessible components and restrained motion.",
   "type": "module",
   "license": "MIT",
+  "author": {
+    "name": "Egor Yolkin",
+    "url": "https://github.com/EgorYolkin"
+  },
+  "homepage": "https://github.com/EgorYolkin/fuse-ui#readme",
+  "bugs": {
+    "url": "https://github.com/EgorYolkin/fuse-ui/issues"
+  },
   "sideEffects": [
     "**/*.css"
   ],
   "files": [
     "dist",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE",
     "styles.d.ts"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./dist/types/src/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/types/src/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./styles.css": {
       "types": "./styles.d.ts",
@@ -27,7 +37,9 @@
     }
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
@@ -40,24 +52,28 @@
     "tailwindcss",
     "components"
   ],
-  "engines": {
-    "node": ">=22.12.0"
-  },
+  "packageManager": "npm@10.9.7",
   "scripts": {
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "npm run build && node --test tests/*.test.mjs",
+    "test:package": "npm run build && node scripts/check-package.mjs",
     "check": "npm run typecheck && npm run lint && npm run test",
-    "prepublishOnly": "npm run check"
+    "prepack": "npm run check"
   },
   "peerDependencies": {
-    "react": ">=19.0.0",
-    "react-dom": ">=19.0.0"
+    "@fontsource-variable/geist": "^5.2.9",
+    "react": ">=19.0.0 <20.0.0",
+    "react-dom": ">=19.0.0 <20.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@fontsource-variable/geist": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
-    "@fontsource-variable/geist": "^5.2.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.16.0",
@@ -66,6 +82,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@fontsource-variable/geist": "^5.2.9",
     "@tailwindcss/vite": "^4.3.0",
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",

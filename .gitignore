@@ -1,7 +1,9 @@
 node_modules
 dist
 coverage
+.pi-subagents
 *.log
+*.tgz
 .DS_Store
 .idea
 .vscode

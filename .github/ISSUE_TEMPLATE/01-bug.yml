@@ -1,0 +1,65 @@
+name: Bug report
+description: Report a reproducible problem in Fuse UI
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Fuse UI. Search existing issues first and do not disclose security vulnerabilities here.
+  - type: input
+    id: package-version
+    attributes:
+      label: Fuse UI version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: react-version
+    attributes:
+      label: React version
+      placeholder: 19.2.0
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include framework, browser, operating system, Node.js, and package manager versions when relevant.
+      placeholder: |
+        Framework: Vite 8
+        Browser: Chrome 140
+        OS: macOS
+        Node.js: 22.22.0
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current behavior
+      description: What happened? Include error output or screenshots without secrets.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Link to a small repository or provide complete steps that reproduce the problem.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Submission checks
+      options:
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
+        - label: This report does not contain a security vulnerability.
+          required: true
+        - label: I agree to follow the Code of Conduct.
+          required: true

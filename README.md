@@ -1,6 +1,19 @@
 # Fuse UI
 
+[![CI](https://github.com/EgorYolkin/fuse-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/EgorYolkin/fuse-ui/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/%40egoryolkin%2Ffuse-ui)](https://www.npmjs.com/package/@egoryolkin/fuse-ui)
+[![license](https://img.shields.io/npm/l/%40egoryolkin%2Ffuse-ui)](LICENSE)
+
 A reusable React UI kit with a technical, editorial visual language: sharp controls, fine borders, registration corners, layered panels, monospace metadata, and restrained motion.
+
+## Features
+
+- Typed React components published as ESM
+- One opt-in stylesheet with light and dark semantic tokens
+- Accessible primitives built on Base UI
+- Reduced-motion support for non-essential animation
+- Tree-shakeable JavaScript and explicit package exports
+- npm Trusted Publishing with provenance
 
 ## Installation
 
@@ -8,26 +21,32 @@ A reusable React UI kit with a technical, editorial visual language: sharp contr
 npm install @egoryolkin/fuse-ui
 ```
 
-Import the shared styles once in the application entry point. Geist is optional and kept outside the core stylesheet so consumers do not pay for an embedded font unless they use it:
+Fuse UI supports React and React DOM 19.x. Import the shared stylesheet once in your application entry point:
 
 ```tsx
-// Optional: keeps the intended Fuse UI typography.
-import "@fontsource-variable/geist"
 import "@egoryolkin/fuse-ui/styles.css"
 ```
 
-Add `class="dark"` to the application root to enable the built-in dark theme.
+Geist is an optional peer dependency. Install and import it if you want the intended typography:
 
-Then import components where needed:
+```bash
+npm install @fontsource-variable/geist
+```
+
+```tsx
+import "@fontsource-variable/geist"
+```
+
+## Quick start
 
 ```tsx
 import {
   BracketButton,
   CornerBox,
   Heading,
-  Marquee,
   Text,
 } from "@egoryolkin/fuse-ui"
+import "@egoryolkin/fuse-ui/styles.css"
 
 export function Hero() {
   return (
@@ -42,94 +61,62 @@ export function Hero() {
 }
 ```
 
+Add `className="dark"` (or `class="dark"` outside React) to an application root to enable the dark theme.
+
 ## Components
 
-### Layout
+| Area | Exports |
+| --- | --- |
+| Layout | `Container`, `Stack`, `Cluster`, `Grid`, `Navbar`, `Footer` |
+| Typography | `Heading`, `Text`, `Kicker`, `Highlight`, `HighlightHeading`, `SectionHeading` |
+| Actions and inputs | `Button`, `BracketButton`, `Select`, `LocaleSwitcher` |
+| Surfaces and data | `CornerBox`, `PatternStrip`, `IconTile`, `IconList`, `StackedPanel`, `StaggeredList` |
+| Motion | `Marquee`, `ScrollCrown` |
 
-- `Container`
-- `Stack`
-- `Cluster`
-- `Grid`
-- `Navbar`
-- `Footer`
+The Select export also includes `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectGroup`, `SelectLabel`, `SelectItem`, `SelectSeparator`, and scroll buttons. Stacked panels and staggered lists expose their corresponding content/item helpers.
 
-### Typography
+All component props are exported through the generated TypeScript declarations and extend the relevant native or Base UI props where appropriate.
 
-- `Heading`
-- `Text`
-- `Kicker`
-- `Highlight`
-- `HighlightHeading`
-- `SectionHeading`
+## Styling and theming
 
-### Actions and inputs
+Fuse UI ships compiled Tailwind CSS, so consumers do not need to configure Tailwind or scan this package. The stylesheet defines semantic tokens such as `--background`, `--foreground`, `--surface`, `--border`, `--primary`, and `--muted-foreground` for both default and `.dark` themes.
 
-- `Button`
-- `BracketButton`
-- `Select`
-- `LocaleSwitcher`
+Load the stylesheet before application overrides. Override semantic custom properties at your application root rather than targeting component internals:
 
-### Surfaces and data display
+```css
+:root {
+  --primary: oklch(0.55 0.18 250);
+}
+```
 
-- `CornerBox`
-- `PatternStrip`
-- `IconTile`
-- `IconList`
-- `StackedPanel`
-- `StackedPanelContent`
-- `StackedPanelLink`
-- `StaggeredList`
+The exact token set is available in [`src/styles.css`](src/styles.css). CSS is marked as a package side effect so bundlers retain explicit stylesheet imports.
 
-### Motion
+## Accessibility
 
-- `Marquee`
-- `ScrollCrown`
+Components use semantic elements and accessible Base UI primitives where applicable. Motion responds to `prefers-reduced-motion`. Consumers remain responsible for meaningful labels, focus order, color contrast after token overrides, and testing complete application flows with a keyboard and assistive technology.
+
+Interactive components use React client APIs. In React Server Component frameworks, render them behind the framework's client boundary.
 
 ## Development
 
-Requires Node.js 22.12 or newer.
+Development requires Node.js 22.12 or newer and the npm version declared in `package.json`.
 
 ```bash
-npm install
+npm ci
 npm run check
+npm run test:package
 ```
 
-The production package is generated in `dist/`.
+The production package is generated in `dist/`. See [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a change.
 
-## Publishing
+## Releases and support
 
-The first package version must be published locally with npm 2FA:
-
-```bash
-npm login
-npm publish --access public --otp=<one-time-code>
-```
-
-After the package exists, configure an npm Trusted Publisher with:
-
-```text
-Provider: GitHub Actions
-Owner: EgorYolkin
-Repository: fuse-ui
-Workflow: release.yml
-Environment: leave empty
-```
-
-No npm token is stored in GitHub. Subsequent versions are published through OIDC when a GitHub Release is created:
-
-```bash
-npm version patch
-git push --follow-tags
-```
-
-Then create a release for the new tag on GitHub. The workflow checks that the version is not already present and publishes it with npm provenance.
-
-Consumers can update centrally with:
-
-```bash
-npm install @egoryolkin/fuse-ui@latest
-```
+- Changes follow [Semantic Versioning](https://semver.org/) and are recorded in [CHANGELOG.md](CHANGELOG.md).
+- Maintainer release steps are documented in [RELEASING.md](RELEASING.md).
+- For usage help and bugs, see [SUPPORT.md](SUPPORT.md).
+- Report vulnerabilities privately according to [SECURITY.md](SECURITY.md).
+- Community participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
-MIT © Egor Yolkin
+[MIT](LICENSE) © Egor Yolkin
