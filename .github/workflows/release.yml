@@ -49,15 +49,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run test:package
-      - name: Pack verified release artifact
-        id: pack
-        shell: bash
-        run: |
-          TARBALL=$(npm pack --ignore-scripts --json | node -e "let input=''; process.stdin.on('data', chunk => input += chunk); process.stdin.on('end', () => console.log(JSON.parse(input)[0].filename))")
-          echo "tarball=${TARBALL}" >> "$GITHUB_OUTPUT"
       - name: Publish package
-        env:
-          TARBALL: ${{ steps.pack.outputs.tarball }}
         shell: bash
         run: |
           PACKAGE_NAME=$(node -p "require('./package.json').name")
@@ -68,4 +60,4 @@ jobs:
             exit 0
           fi
 
-          npm publish "${TARBALL}" --access public --provenance
+          npm publish --access public --provenance --ignore-scripts
