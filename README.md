@@ -93,19 +93,31 @@ The production package is generated in `dist/`.
 
 ## Publishing
 
-1. Authenticate with npm:
+The first package version must be published locally with npm 2FA:
 
-   ```bash
-   npm login
-   ```
+```bash
+npm login
+npm publish --access public --otp=<one-time-code>
+```
 
-2. Choose a version:
+After the package exists, configure an npm Trusted Publisher with:
 
-   ```bash
-   npm version patch
-   ```
+```text
+Provider: GitHub Actions
+Owner: EgorYolkin
+Repository: fuse-ui
+Workflow: release.yml
+Environment: leave empty
+```
 
-3. Push the commit and tag, then create a GitHub Release. The release workflow publishes the package automatically when the `NPM_TOKEN` repository secret is configured.
+No npm token is stored in GitHub. Subsequent versions are published through OIDC when a GitHub Release is created:
+
+```bash
+npm version patch
+git push --follow-tags
+```
+
+Then create a release for the new tag on GitHub. The workflow checks that the version is not already present and publishes it with npm provenance.
 
 Consumers can update centrally with:
 
