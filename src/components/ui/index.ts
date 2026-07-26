@@ -11,7 +11,7 @@ export { IconList } from "./icon-list";
 export { IconTile } from "./icon-tile";
 export { LocaleSwitcher } from "./locale-switcher";
 export type { LocaleOption } from "./locale-switcher";
-export { Marquee } from "./marquee";
+export { calculateMarqueeCopies, Marquee } from "./marquee";
 export { Navbar } from "./navbar";
 export { PatternStrip } from "./pattern-strip";
 export { ScrollCrown } from "./scroll-crown";
@@ -28,6 +28,6 @@ export {
   SelectTrigger,
   SelectValue,
 } from "./select";
-export { StackedPanel, StackedPanelLink } from "./stacked-panel";
+export { StackedPanel, StackedPanelContent, StackedPanelLink } from "./stacked-panel";
 export { StaggeredList, StaggeredListItem } from "./staggered-list";
 export { Heading, Highlight, HighlightHeading, Kicker, Text } from "./typography";

@@ -19,6 +19,10 @@ function StackedPanel({
   );
 }
 
+function StackedPanelContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("stacked-panel-content", className)} {...props} />;
+}
+
 function StackedPanelLink({ className, href, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) {
   const isExternal = typeof href === "string" && href.startsWith("http");
 
@@ -33,4 +37,4 @@ function StackedPanelLink({ className, href, ...props }: AnchorHTMLAttributes<HT
   );
 }
 
-export { StackedPanel, StackedPanelLink };
+export { StackedPanel, StackedPanelContent, StackedPanelLink };

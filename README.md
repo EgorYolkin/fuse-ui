@@ -8,11 +8,15 @@ A reusable React UI kit with a technical, editorial visual language: sharp contr
 npm install @egoryolkin/fuse-ui
 ```
 
-Import the shared styles once in the application entry point:
+Import the shared styles once in the application entry point. Geist is optional and kept outside the core stylesheet so consumers do not pay for an embedded font unless they use it:
 
 ```tsx
+// Optional: keeps the intended Fuse UI typography.
+import "@fontsource-variable/geist"
 import "@egoryolkin/fuse-ui/styles.css"
 ```
+
+Add `class="dark"` to the application root to enable the built-in dark theme.
 
 Then import components where needed:
 
@@ -72,6 +76,8 @@ export function Hero() {
 - `IconTile`
 - `IconList`
 - `StackedPanel`
+- `StackedPanelContent`
+- `StackedPanelLink`
 - `StaggeredList`
 
 ### Motion
@@ -86,7 +92,6 @@ Requires Node.js 22.12 or newer.
 ```bash
 npm install
 npm run check
-npm run build
 ```
 
 The production package is generated in `dist/`.

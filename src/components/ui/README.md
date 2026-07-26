@@ -20,7 +20,7 @@ This directory contains reusable design primitives. It must not contain pages or
 
 - `corner-box.tsx` — bordered surface with corner marks
 - `pattern-strip.tsx` — hatched content strip
-- `stacked-panel.tsx` — layered panel and link surface with default and compact sizes
+- `stacked-panel.tsx` — layered panel with semantic content and link surfaces in default and compact sizes
 - `staggered-list.tsx` — vertical or horizontal list with optional cascading offset
 - `icon-tile.tsx` — framed icon container
 
@@ -32,3 +32,10 @@ This directory contains reusable design primitives. It must not contain pages or
 - `button.tsx` — base shadcn button
 
 Use exports from `@/components/ui`. Pages compose these primitives themselves; page sections and content stay outside the UI kit.
+
+## Consistency
+
+- Use the 4px spacing grid: 8, 12, 16, 20, 24, and 32px.
+- Reserve layout space for decorative offsets instead of letting them overflow.
+- Use semantic color tokens so light and dark themes stay aligned.
+- Respect `prefers-reduced-motion` for every non-essential transition.

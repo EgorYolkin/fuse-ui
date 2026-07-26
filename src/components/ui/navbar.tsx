@@ -6,6 +6,8 @@ interface NavbarProps extends HTMLAttributes<HTMLElement> {
   brand: ReactNode;
   center?: ReactNode;
   actions?: ReactNode;
+  /** Renders actions as a labelled group instead of the legacy navigation landmark. */
+  actionsLabel?: string;
   navigationLabel?: string;
 }
 
@@ -13,10 +15,12 @@ function Navbar({
   brand,
   center,
   actions,
+  actionsLabel,
   navigationLabel = "Primary navigation",
   className,
   ...props
 }: NavbarProps) {
+  const actionsAreNavigation = actionsLabel === undefined;
   return (
     <header
       className={cn("sticky top-0 z-20 border-b border-nav-border bg-nav-bg/90 backdrop-blur", className)}
@@ -25,11 +29,20 @@ function Navbar({
       <Container className="relative flex h-16 items-center justify-between">
         <div className="min-w-0">{brand}</div>
         {center && (
-          <div className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 md:block">
+          <div className="absolute left-1/2 hidden -translate-x-1/2 md:block">
             {center}
           </div>
         )}
-        {actions && <nav className="flex items-center gap-3" aria-label={navigationLabel}>{actions}</nav>}
+        {actions && actionsAreNavigation && (
+          <nav className="flex items-center gap-3" aria-label={navigationLabel}>
+            {actions}
+          </nav>
+        )}
+        {actions && !actionsAreNavigation && (
+          <div className="flex items-center gap-3" role="group" aria-label={actionsLabel}>
+            {actions}
+          </div>
+        )}
       </Container>
     </header>
   );

@@ -29,7 +29,7 @@ function Footer({
   return (
     <footer className={cn("mt-12", className)} {...props}>
       <CornerBox full className="border border-border bg-surface">
-        <div className="grid gap-8 px-5 py-8 sm:px-7 md:grid-cols-[1fr_auto] md:items-start">
+        <div className="grid gap-8 px-5 py-8 sm:px-6 md:grid-cols-[1fr_auto] md:items-start">
           <div className="max-w-md">
             <div className="text-xl font-semibold text-text-primary">{brand}</div>
             {description && <Text className="mt-3 text-sm">{description}</Text>}
@@ -37,18 +37,18 @@ function Footer({
 
           {links.length > 0 && (
             <nav className="grid gap-2 sm:grid-cols-3" aria-label={navigationLabel}>
-              {links.map((link) => {
+              {links.map((link, index) => {
                 const external = link.href.startsWith("http");
                 return (
                   <a
-                    key={link.href}
+                    key={`${index}-${link.href}`}
                     href={link.href}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noopener noreferrer" : undefined}
                     className="footer-link"
                   >
                     {link.label}
-                    <ArrowUpRight className="size-3.5 text-text-muted" aria-hidden="true" />
+                    <ArrowUpRight data-icon="inline-end" className="text-text-muted" aria-hidden="true" />
                   </a>
                 );
               })}
@@ -57,7 +57,7 @@ function Footer({
         </div>
 
         {bottom && (
-          <div className="hatched-header flex flex-col gap-2 border-t border-border px-5 py-3 font-mono text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between sm:px-7">
+          <div className="hatched-header flex flex-col gap-2 border-t border-border px-5 py-3 font-mono text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
             {bottom}
           </div>
         )}
