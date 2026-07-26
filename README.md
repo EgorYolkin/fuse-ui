@@ -61,7 +61,26 @@ export function Hero() {
 }
 ```
 
-Add `className="dark"` (or `class="dark"` outside React) to an application root to enable the dark theme.
+Add `className="dark"` (or `class="dark"` outside React) to an application root to enable the dark theme manually.
+
+### Theme provider
+
+Use `ThemeProvider` for persisted light, dark, and system modes. It updates the root `<html>` class, follows changes to `prefers-color-scheme`, and injects a small SSR-safe initialization script to avoid a theme flash:
+
+```tsx
+import { ThemeProvider, ThemeToggle } from "@egoryolkin/fuse-ui"
+
+export function App() {
+  return (
+    <ThemeProvider defaultTheme="system" storageKey="app-theme">
+      <ThemeToggle showLabel />
+      {/* application */}
+    </ThemeProvider>
+  )
+}
+```
+
+`useTheme()` returns `{ theme, resolvedTheme, setTheme }` for custom controls. The included `ThemeToggle` cycles through light, dark, and system modes. Pass `nonce` to `ThemeProvider` when your Content Security Policy requires one.
 
 ## Components
 
@@ -69,9 +88,10 @@ Add `className="dark"` (or `class="dark"` outside React) to an application root 
 | --- | --- |
 | Layout | `Container`, `Stack`, `Cluster`, `Grid`, `Navbar`, `Footer` |
 | Typography | `Heading`, `Text`, `Kicker`, `Highlight`, `HighlightHeading`, `SectionHeading` |
-| Actions and inputs | `Button`, `BracketButton`, `Select`, `LocaleSwitcher` |
+| Actions and inputs | `Button`, `BracketButton`, `Select`, `LocaleSwitcher`, `ThemeToggle` |
 | Surfaces and data | `CornerBox`, `PatternStrip`, `IconTile`, `IconList`, `StackedPanel`, `StaggeredList` |
 | Motion | `Marquee`, `ScrollCrown` |
+| Theme | `ThemeProvider`, `ThemeToggle`, `useTheme` |
 
 The Select export also includes `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectGroup`, `SelectLabel`, `SelectItem`, `SelectSeparator`, and scroll buttons. Stacked panels and staggered lists expose their corresponding content/item helpers.
 

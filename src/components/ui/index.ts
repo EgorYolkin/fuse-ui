@@ -30,4 +30,13 @@ export {
 } from "./select";
 export { StackedPanel, StackedPanelContent, StackedPanelLink } from "./stacked-panel";
 export { StaggeredList, StaggeredListItem } from "./staggered-list";
+export { ThemeProvider, themes, useTheme } from "./theme-provider";
+export type {
+  ResolvedTheme,
+  Theme,
+  ThemeContextValue,
+  ThemeProviderProps,
+} from "./theme-provider";
+export { ThemeToggle } from "./theme-toggle";
+export type { ThemeToggleProps } from "./theme-toggle";
 export { Heading, Highlight, HighlightHeading, Kicker, Text } from "./typography";

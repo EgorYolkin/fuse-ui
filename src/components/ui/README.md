@@ -10,6 +10,8 @@ This directory contains reusable design primitives. It must not contain pages or
 - `marquee.tsx` — seamless, infinitely looping content ticker
 - `locale-switcher.tsx` — compact accessible custom locale selector
 - `footer.tsx` — reusable footer shell with brand, navigation, and bottom slots
+- `theme-provider.tsx` — persisted light, dark, and system theme state
+- `theme-toggle.tsx` — accessible theme-mode control
 
 ## Typography
 

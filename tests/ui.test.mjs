@@ -13,6 +13,8 @@ import {
   StackedPanelContent,
   StaggeredList,
   StaggeredListItem,
+  ThemeProvider,
+  ThemeToggle,
 } from "../dist/index.js";
 
 const render = (component, props, ...children) =>
@@ -79,6 +81,20 @@ test("marquee fills wide containers and handles repeated labels", () => {
 
 test("stacked panels expose non-interactive content", () => {
   assert.match(render(StackedPanelContent, null, "Panel"), /^<div class="stacked-panel-content"/);
+});
+
+test("theme provider renders an SSR-safe theme script and accessible toggle", () => {
+  const html = render(
+    ThemeProvider,
+    { defaultTheme: "dark", storageKey: "test-theme", nonce: "test-nonce" },
+    createElement(ThemeToggle, { showLabel: true }),
+  );
+
+  assert.match(html, /<script nonce="test-nonce"/);
+  assert.match(html, /localStorage\.getItem\(k\)/);
+  assert.match(html, /aria-label="Dark theme\. Switch to System"/);
+  assert.match(html, /data-theme="dark"/);
+  assert.match(html, />Dark<\/span>/);
 });
 
 test("core styles preserve spacing, motion and theme invariants", async () => {

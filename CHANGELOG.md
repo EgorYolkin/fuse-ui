@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-26
+
+### Added
+
+- `ThemeProvider`, `useTheme`, and `ThemeToggle` for persisted light, dark, and system theme modes.
+
 ## [0.1.1] - 2026-07-26
 
 ### Added
@@ -33,5 +39,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Improved npm package metadata, declaration layout, release verification, and publish provenance.
 - Restored native page scrollbars instead of globally hiding them.
 
-[Unreleased]: https://github.com/EgorYolkin/fuse-ui/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/EgorYolkin/fuse-ui/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/EgorYolkin/fuse-ui/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/EgorYolkin/fuse-ui/compare/f7db47f...v0.1.1
