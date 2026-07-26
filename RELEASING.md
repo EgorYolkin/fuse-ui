@@ -5,8 +5,8 @@ This document is for maintainers.
 ## Prerequisites
 
 - npm two-factor authentication is enabled.
-- A protected GitHub Environment named `npm` exists and requires maintainer approval.
-- The package has an npm Trusted Publisher for `EgorYolkin/fuse-ui`, `.github/workflows/release.yml`, and the `npm` environment.
+- The package has an npm Trusted Publisher for `EgorYolkin/fuse-ui` and `.github/workflows/release.yml`.
+- If a protected GitHub Environment is added later, the same environment name is configured in both the workflow job and npm Trusted Publisher.
 - `main` is green and the working tree is clean.
 
 ## Release checklist
@@ -32,7 +32,7 @@ This document is for maintainers.
 6. Confirm the Publish package workflow succeeds.
 7. Verify the package, provenance, README, and install command on npm.
 
-The workflow checks out the release tag, requires it to equal `v<package version>`, verifies the packed package in an isolated consumer, and publishes with npm Trusted Publishing (OIDC). No long-lived npm token is stored in GitHub. Publishing is idempotent for an already-published version.
+The workflow checks out `refs/tags/v<package version>`, verifies the package in an isolated consumer, and publishes with npm Trusted Publishing (OIDC). No long-lived npm token is stored in GitHub. Publishing is idempotent for an already-published version.
 
 ## First release only
 
