@@ -5,14 +5,21 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import {
+  Badge,
   Button,
   calculateMarqueeCopies,
+  Code,
+  CodeBlock,
   Heading,
   Marquee,
   Navbar,
   StackedPanelContent,
   StaggeredList,
   StaggeredListItem,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
   ThemeProvider,
   ThemeToggle,
 } from "../dist/index.js";
@@ -20,10 +27,16 @@ import {
 const render = (component, props, ...children) =>
   renderToStaticMarkup(createElement(component, props, ...children));
 
-test("default button has an interactive hover state", () => {
+test("buttons use Fuse variants and the sharp component geometry", () => {
+  for (const variant of ["default", "outline", "ghost", "destructive"]) {
+    const html = render(Button, { variant }, variant);
+    assert.match(html, /rounded-\[2px\]/);
+    assert.match(html, /transition-\[color,background-color,border-color,box-shadow\]/);
+  }
+
   const html = render(Button, null, "Save");
-  assert.match(html, /hover:bg-primary\/80/);
-  assert.doesNotMatch(html, /\[a\]:hover/);
+  assert.match(html, /hover:bg-primary\/90/);
+  assert.doesNotMatch(html, /transition-all|translate-y/);
 });
 
 test("all heading levels render their semantic element", () => {
@@ -83,6 +96,49 @@ test("stacked panels expose non-interactive content", () => {
   assert.match(render(StackedPanelContent, null, "Panel"), /^<div class="stacked-panel-content"/);
 });
 
+test("badges expose all Fuse status variants", () => {
+  for (const variant of ["default", "outline", "ghost", "destructive"]) {
+    const html = render(Badge, { variant }, variant);
+    assert.match(html, /data-slot="badge"/);
+    assert.match(html, /rounded-\[2px\]/);
+  }
+});
+
+test("tabs render accessible tabs and associated panels", () => {
+  const html = render(
+    Tabs,
+    { defaultValue: "preview" },
+    createElement(
+      TabsList,
+      null,
+      createElement(TabsTrigger, { value: "preview" }, "Preview"),
+      createElement(TabsTrigger, { value: "code" }, "Code"),
+    ),
+    createElement(TabsContent, { value: "preview" }, "Preview panel"),
+    createElement(TabsContent, { value: "code" }, "Code panel"),
+  );
+
+  assert.match(html, /role="tablist"/);
+  assert.equal((html.match(/role="tab"/g) ?? []).length, 2);
+  assert.match(html, /aria-selected="true"/);
+  assert.match(html, /role="tabpanel"/);
+});
+
+test("code components render inline and syntax-highlighted code", () => {
+  const inlineHtml = render(Code, null, "npm run check");
+  const blockHtml = render(CodeBlock, {
+    code: "const answer = 42",
+    language: "tsx",
+    showLineNumbers: true,
+  });
+
+  assert.match(inlineHtml, /data-slot="code"/);
+  assert.match(blockHtml, /data-slot="code-block"/);
+  assert.match(blockHtml, /data-line-numbers="true"/);
+  assert.match(blockHtml, /code-block-line-number/);
+  assert.match(blockHtml, /var\(--syntax-keyword\)/);
+});
+
 test("theme provider renders an SSR-safe theme script and accessible toggle", () => {
   const html = render(
     ThemeProvider,
@@ -104,7 +160,9 @@ test("core styles preserve spacing, motion and theme invariants", async () => {
   assert.match(css, /width: calc\(100% - var\(--staggered-max-offset\)\)/);
   assert.match(css, /padding: 0 8px 8px 0/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
-  assert.doesNotMatch(css, /scrollbar-width:\s*none/);
+  assert.match(css, /--syntax-keyword:/);
+  assert.match(css, /\.code-block-pre/);
+  assert.doesNotMatch(css, /html\s*\{[^}]*scrollbar-width:\s*none/s);
   assert.doesNotMatch(css, /0\.(?:35|45|55|65|85)rem/);
   assert.doesNotMatch(css, /1\.(?:1|2|35)rem/);
 });

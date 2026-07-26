@@ -89,11 +89,27 @@ export function App() {
 | Layout | `Container`, `Stack`, `Cluster`, `Grid`, `Navbar`, `Footer` |
 | Typography | `Heading`, `Text`, `Kicker`, `Highlight`, `HighlightHeading`, `SectionHeading` |
 | Actions and inputs | `Button`, `BracketButton`, `Select`, `LocaleSwitcher`, `ThemeToggle` |
-| Surfaces and data | `CornerBox`, `PatternStrip`, `IconTile`, `IconList`, `StackedPanel`, `StaggeredList` |
+| Navigation | `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent` |
+| Surfaces and data | `Badge`, `CornerBox`, `PatternStrip`, `IconTile`, `IconList`, `StackedPanel`, `StaggeredList` |
+| Code | `Code`, `CodeBlock` |
 | Motion | `Marquee`, `ScrollCrown` |
 | Theme | `ThemeProvider`, `ThemeToggle`, `useTheme` |
 
-The Select export also includes `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectGroup`, `SelectLabel`, `SelectItem`, `SelectSeparator`, and scroll buttons. Stacked panels and staggered lists expose their corresponding content/item helpers.
+The Select export also includes `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectGroup`, `SelectLabel`, `SelectItem`, `SelectSeparator`, and scroll buttons. Stacked panels and staggered lists expose their corresponding content/item helpers. Buttons and badges share `default`, `outline`, `ghost`, and `destructive` visual variants.
+
+`CodeBlock` applies Fuse UI syntax colors to highlighted source and supports optional line numbers:
+
+```tsx
+import { CodeBlock } from "@egoryolkin/fuse-ui"
+
+<CodeBlock
+  language="tsx"
+  showLineNumbers
+  code={`export function SaveButton() {\n  return <Button>Save</Button>\n}`}
+/>
+```
+
+Inline `<code>` elements receive the same technical surface treatment from the shared stylesheet.
 
 All component props are exported through the generated TypeScript declarations and extend the relevant native or Base UI props where appropriate.
 

@@ -12,6 +12,7 @@ const externalPackages = [
   "class-variance-authority",
   "clsx",
   "lucide-react",
+  "prism-react-renderer",
   "tailwind-merge",
 ];
 

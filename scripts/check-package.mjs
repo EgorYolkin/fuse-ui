@@ -74,11 +74,11 @@ try {
   );
   await writeFile(
     path.join(temporaryDirectory, "consumer.tsx"),
-    `import { Button, Heading } from "@egoryolkin/fuse-ui";\nimport "@egoryolkin/fuse-ui/styles.css";\n\nexport const Example = () => <><Heading level={2}>Title</Heading><Button>Save</Button></>;\n`,
+    `import { Badge, Button, CodeBlock, Heading, Tabs, TabsContent, TabsList, TabsTrigger } from "@egoryolkin/fuse-ui";\nimport "@egoryolkin/fuse-ui/styles.css";\n\nexport const Example = () => <><Heading level={2}>Title</Heading><Button>Save</Button><Badge>Stable</Badge><Tabs defaultValue="preview"><TabsList><TabsTrigger value="preview">Preview</TabsTrigger></TabsList><TabsContent value="preview"><CodeBlock code="const ready = true" language="tsx" /></TabsContent></Tabs></>;\n`,
   );
   await writeFile(
     path.join(temporaryDirectory, "consumer.mjs"),
-    `import { createElement } from "react";\nimport { renderToStaticMarkup } from "react-dom/server";\nimport { Button } from "@egoryolkin/fuse-ui";\n\nconst html = renderToStaticMarkup(createElement(Button, null, "Save"));\nif (!html.includes("Save")) throw new Error("Package runtime smoke test failed");\n`,
+    `import { createElement } from "react";\nimport { renderToStaticMarkup } from "react-dom/server";\nimport { Badge, Button, CodeBlock } from "@egoryolkin/fuse-ui";\n\nconst html = renderToStaticMarkup(createElement("div", null, createElement(Button, null, "Save"), createElement(Badge, null, "Stable"), createElement(CodeBlock, { code: "const ready = true", language: "tsx" })));\nif (!html.includes("Save") || !html.includes("code-block")) throw new Error("Package runtime smoke test failed");\n`,
   );
 
   run(

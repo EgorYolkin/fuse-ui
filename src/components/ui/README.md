@@ -17,6 +17,7 @@ This directory contains reusable design primitives. It must not contain pages or
 
 - `typography.tsx` — `Heading`, `Text`, `Kicker`, `Highlight`, `HighlightHeading`
 - `section-heading.tsx` — generic kicker/title/description composition
+- `code-block.tsx` — inline code and syntax-highlighted code blocks
 
 ## Surfaces and decoration
 
@@ -25,13 +26,15 @@ This directory contains reusable design primitives. It must not contain pages or
 - `stacked-panel.tsx` — layered panel with semantic content and link surfaces in default and compact sizes
 - `staggered-list.tsx` — vertical or horizontal list with optional cascading offset
 - `icon-tile.tsx` — framed icon container
+- `badge.tsx` — compact status and metadata labels
 
 ## Content and actions
 
 - `bracket-button.tsx` — project-style link button
 - `icon-list.tsx` — generic icon-led text list
 - `icons.tsx` — custom brand icons
-- `button.tsx` — base shadcn button
+- `button.tsx` — Fuse-styled Base UI button
+- `tabs.tsx` — accessible default and line-style tab compositions
 
 Use exports from `@/components/ui`. Pages compose these primitives themselves; page sections and content stay outside the UI kit.
 

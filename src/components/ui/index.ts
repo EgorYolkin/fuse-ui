@@ -1,7 +1,10 @@
+export { Badge, badgeVariants } from "./badge";
 export { BracketButton } from "./bracket-button";
 export type { BracketButtonProps } from "./bracket-button";
 export { Button } from "./button";
 export { buttonVariants } from "./button-variants";
+export { Code, CodeBlock, fuseCodeTheme } from "./code-block";
+export type { CodeBlockProps, CodeLanguage, CodeProps } from "./code-block";
 export { Cluster, Container, Grid, Stack } from "./layout";
 export { CornerBox } from "./corner-box";
 export { Footer } from "./footer";
@@ -30,6 +33,7 @@ export {
 } from "./select";
 export { StackedPanel, StackedPanelContent, StackedPanelLink } from "./stacked-panel";
 export { StaggeredList, StaggeredListItem } from "./staggered-list";
+export { Tabs, TabsContent, TabsList, TabsTrigger, tabsListVariants } from "./tabs";
 export { ThemeProvider, themes, useTheme } from "./theme-provider";
 export type {
   ResolvedTheme,
