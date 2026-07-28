@@ -1,6 +1,6 @@
 {
   "name": "@egoryolkin/fuse-ui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A technical, editorial React UI kit with accessible components and restrained motion.",
   "type": "module",
   "license": "MIT",
