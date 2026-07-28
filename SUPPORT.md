@@ -1,8 +1,10 @@
 # Support
 
+> **Fuse UI documentation:** **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**
+
 ## Questions and usage help
 
-Before asking for help, read the [README](README.md) and search [existing issues](https://github.com/EgorYolkin/fuse-ui/issues).
+Before asking for help, read the [Fuse UI documentation](https://fuse-ui.egoryolkin.ru), check the [README](README.md), and search [existing issues](https://github.com/EgorYolkin/fuse-ui/issues).
 
 For a reproducible library bug, open a [bug report](https://github.com/EgorYolkin/fuse-ui/issues/new?template=01-bug.yml). For an API or component proposal, open a [feature request](https://github.com/EgorYolkin/fuse-ui/issues/new?template=02-feature.yml).
 

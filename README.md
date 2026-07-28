@@ -6,6 +6,12 @@
 
 A reusable React UI kit with a technical, editorial visual language: sharp controls, fine borders, registration corners, layered panels, monospace metadata, and restrained motion.
 
+[![Fuse UI Button component previews](assets/button-showcase.png)](https://fuse-ui.egoryolkin.ru/components/button)
+
+*Button variants and sizes — open the image for the interactive component preview.*
+
+> **Documentation:** explore every component, live UI examples, and usage guidance at **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**.
+
 ## Features
 
 - Typed React components published as ESM
@@ -53,8 +59,12 @@ export function Hero() {
     <CornerBox full className="border border-border bg-surface p-8">
       <Heading>Build useful things.</Heading>
       <Text className="mt-3">A reusable Fuse UI surface.</Text>
-      <BracketButton className="mt-6" href="/docs" variant="primary">
-        Open docs
+      <BracketButton
+        className="mt-6"
+        href="https://fuse-ui.egoryolkin.ru"
+        variant="primary"
+      >
+        Open documentation
       </BracketButton>
     </CornerBox>
   )
@@ -62,6 +72,41 @@ export function Hero() {
 ```
 
 Add `className="dark"` (or `class="dark"` outside React) to an application root to enable the dark theme manually.
+
+## UI examples
+
+Compose the primitives into product surfaces; Fuse UI supplies the visual language while your application owns the layout and content.
+
+```tsx
+import {
+  Badge,
+  BracketButton,
+  CornerBox,
+  Heading,
+  Text,
+} from "@egoryolkin/fuse-ui"
+
+export function ReleaseCard() {
+  return (
+    <CornerBox full className="border border-border bg-surface p-6">
+      <Badge variant="outline">v0.3.0</Badge>
+      <Heading className="mt-4">Ready to ship</Heading>
+      <Text className="mt-2 text-muted-foreground">
+        Accessible controls and semantic tokens, ready for your application.
+      </Text>
+      <BracketButton
+        className="mt-6"
+        href="https://fuse-ui.egoryolkin.ru"
+        variant="primary"
+      >
+        Browse component examples
+      </BracketButton>
+    </CornerBox>
+  )
+}
+```
+
+For more compositions, theme states, and component APIs, visit **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**.
 
 ### Theme provider
 
@@ -83,6 +128,8 @@ export function App() {
 `useTheme()` returns `{ theme, resolvedTheme, setTheme }` for custom controls. The included `ThemeToggle` cycles through light, dark, and system modes. Pass `nonce` to `ThemeProvider` when your Content Security Policy requires one.
 
 ## Components
+
+Complete props, live previews, and implementation examples are available at **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**.
 
 | Area | Exports |
 | --- | --- |
@@ -134,6 +181,8 @@ Components use semantic elements and accessible Base UI primitives where applica
 Interactive components use React client APIs. In React Server Component frameworks, render them behind the framework's client boundary.
 
 ## Development
+
+For consumer documentation, always start at **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**.
 
 Development requires Node.js 22.12 or newer and the npm version declared in `package.json`.
 

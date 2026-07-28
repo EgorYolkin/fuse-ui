@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Pointed package and support documentation to [fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru).
+
 ## [0.3.0] - 2026-07-26
 
 ### Added

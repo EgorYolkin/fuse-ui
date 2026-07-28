@@ -1,5 +1,7 @@
 # Security Policy
 
+> **Fuse UI documentation:** **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**
+
 ## Supported versions
 
 Security fixes are provided for the latest published version of `@egoryolkin/fuse-ui`. Upgrade to the latest release before reporting an issue that may already be fixed.

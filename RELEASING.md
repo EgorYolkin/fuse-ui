@@ -1,5 +1,7 @@
 # Releasing Fuse UI
 
+> **Fuse UI documentation:** **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**
+
 This document is for maintainers.
 
 ## Prerequisites

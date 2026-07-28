@@ -1,5 +1,7 @@
 # UI kit
 
+> **Fuse UI documentation:** **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**
+
 This directory contains reusable design primitives. It must not contain pages or product-specific sections.
 
 ## Layout
