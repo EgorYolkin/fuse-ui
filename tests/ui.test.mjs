@@ -5,17 +5,33 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import {
+  Accordion,
+  AccordionHeader,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  Avatar,
+  AvatarFallback,
   Badge,
   Button,
   calculateMarqueeCopies,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  Checkbox,
   Code,
   CodeBlock,
+  Combobox,
   Heading,
   Marquee,
   Navbar,
   StackedPanelContent,
   StaggeredList,
   StaggeredListItem,
+  Switch,
   Tabs,
   TabsContent,
   TabsList,
@@ -26,6 +42,44 @@ import {
 
 const render = (component, props, ...children) =>
   renderToStaticMarkup(createElement(component, props, ...children));
+
+test("new interactive and status components preserve semantics", () => {
+  const accordionHtml = render(
+    Accordion,
+    { defaultValue: ["details"] },
+    createElement(
+      AccordionItem,
+      { value: "details" },
+      createElement(AccordionHeader, null, createElement(AccordionTrigger, null, "Details")),
+      createElement(AccordionPanel, null, "Panel content"),
+    ),
+  );
+  const alertHtml = render(
+    Alert,
+    { variant: "success" },
+    createElement(AlertTitle, null, "Complete"),
+    createElement(AlertDescription, null, "The operation succeeded."),
+  );
+  const avatarHtml = render(Avatar, null, createElement(AvatarFallback, null, "EY"));
+  const checkboxHtml = render(Checkbox, { defaultChecked: true, "aria-label": "Accept" });
+  const switchHtml = render(Switch, { defaultChecked: true, "aria-label": "Notifications" });
+  const carouselHtml = render(
+    Carousel,
+    null,
+    createElement(CarouselContent, null, createElement(CarouselItem, null, "Slide")),
+  );
+
+  assert.match(accordionHtml, /<button[^>]+aria-expanded="true"/);
+  assert.match(accordionHtml, /Panel content/);
+  assert.match(alertHtml, /role="alert"/);
+  assert.match(alertHtml, /border-emerald-500/);
+  assert.match(avatarHtml, /data-slot="avatar"/);
+  assert.match(checkboxHtml, /role="checkbox"/);
+  assert.match(switchHtml, /role="switch"/);
+  assert.match(switchHtml, /aria-checked="true"/);
+  assert.match(carouselHtml, /aria-roledescription="carousel"/);
+  assert.equal(typeof Combobox, "function");
+});
 
 test("buttons use Fuse variants and the sharp component geometry", () => {
   for (const variant of ["default", "outline", "ghost", "destructive"]) {
@@ -55,7 +109,7 @@ test("staggered list uses list semantics", () => {
 
   assert.match(html, /^<ul/);
   assert.equal((html.match(/<li/g) ?? []).length, 2);
-  assert.match(html, /--staggered-max-offset:9px/);
+  assert.doesNotMatch(html, /--staggered-max-offset|--row-index|translateX/);
 });
 
 test("navbar supports both navigation and non-navigation actions", () => {
@@ -136,6 +190,8 @@ test("code components render inline and syntax-highlighted code", () => {
   assert.match(blockHtml, /data-slot="code-block"/);
   assert.match(blockHtml, /data-line-numbers="true"/);
   assert.match(blockHtml, /code-block-line-number/);
+  assert.match(blockHtml, /aria-label="Copy TSX code example"/);
+  assert.match(blockHtml, />Copy<\/span>/);
   assert.match(blockHtml, /var\(--syntax-keyword\)/);
 });
 
@@ -157,7 +213,8 @@ test("core styles preserve spacing, motion and theme invariants", async () => {
   const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
 
   assert.match(css, /\.dark\s*\{/);
-  assert.match(css, /width: calc\(100% - var\(--staggered-max-offset\)\)/);
+  assert.doesNotMatch(css, /--staggered-max-offset|--row-index/);
+  assert.match(css, /\.staggered-list-item \+ \.staggered-list-item\s*\{[^}]*border-top: 0/s);
   assert.match(css, /padding: 0 8px 8px 0/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /--syntax-keyword:/);

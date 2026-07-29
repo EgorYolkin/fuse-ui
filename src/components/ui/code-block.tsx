@@ -1,4 +1,7 @@
-import type { HTMLAttributes } from "react"
+"use client"
+
+import { useEffect, useRef, useState, type HTMLAttributes } from "react"
+import { CheckIcon, CopyIcon } from "lucide-react"
 import {
   Highlight as PrismHighlight,
   type Language,
@@ -6,6 +9,7 @@ import {
 } from "prism-react-renderer"
 
 import { cn } from "@/lib/utils"
+import { Button } from "./button"
 
 const fuseCodeTheme: PrismTheme = {
   plain: {
@@ -63,6 +67,9 @@ interface CodeBlockProps extends Omit<HTMLAttributes<HTMLElement>, "children"> {
   language?: Language
   label?: string
   showLineNumbers?: boolean
+  copyable?: boolean
+  copyLabel?: string
+  copiedLabel?: string
 }
 
 function CodeBlock({
@@ -70,10 +77,30 @@ function CodeBlock({
   language = "tsx",
   label,
   showLineNumbers = false,
+  copyable = true,
+  copyLabel = "Copy",
+  copiedLabel = "Copied",
   className,
   ...props
 }: CodeBlockProps) {
+  const [copied, setCopied] = useState(false)
+  const resetTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
   const accessibleLabel = label ?? `${language.toUpperCase()} code example`
+
+  useEffect(() => () => {
+    if (resetTimeout.current) clearTimeout(resetTimeout.current)
+  }, [])
+
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopied(true)
+      if (resetTimeout.current) clearTimeout(resetTimeout.current)
+      resetTimeout.current = setTimeout(() => setCopied(false), 2000)
+    } catch {
+      setCopied(false)
+    }
+  }
 
   return (
     <figure
@@ -83,7 +110,22 @@ function CodeBlock({
       className={cn("code-block", className)}
       {...props}
     >
-      <figcaption className="code-block-header">{label ?? language}</figcaption>
+      <figcaption className="code-block-header">
+        <span>{label ?? language}</span>
+        {copyable && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
+            className="code-block-copy"
+            aria-label={`${copyLabel} ${accessibleLabel}`}
+            onClick={copyCode}
+          >
+            {copied ? <CheckIcon aria-hidden="true" /> : <CopyIcon aria-hidden="true" />}
+            <span aria-live="polite">{copied ? copiedLabel : copyLabel}</span>
+          </Button>
+        )}
+      </figcaption>
       <PrismHighlight code={code} language={language} theme={fuseCodeTheme}>
         {({ className: prismClassName, tokens, getLineProps, getTokenProps }) => (
           <pre

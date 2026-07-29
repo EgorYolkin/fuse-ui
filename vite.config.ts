@@ -11,8 +11,10 @@ const externalPackages = [
   "@base-ui/react",
   "class-variance-authority",
   "clsx",
+  "embla-carousel-react",
   "lucide-react",
   "prism-react-renderer",
+  "react-day-picker",
   "tailwind-merge",
 ];
 
@@ -23,6 +25,7 @@ export default defineConfig({
     dts({
       entryRoot: path.resolve(__dirname, "src"),
       include: ["src"],
+      exclude: ["src/**/*.stories.ts", "src/**/*.stories.tsx"],
       outDir: "dist/types",
       tsconfigPath: "./tsconfig.json",
     }),

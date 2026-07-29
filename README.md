@@ -11,6 +11,8 @@ A reusable React UI kit with a technical, editorial visual language: sharp contr
 *Button variants and sizes — open the image for the interactive component preview.*
 
 > **Documentation:** explore every component, live UI examples, and usage guidance at **[fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru)**.
+>
+> **Changes:** see the current release notes in **[CHANGELOG.md](CHANGELOG.md)** or open **Project / Changelog** in Storybook.
 
 ## Features
 
@@ -72,6 +74,20 @@ export function Hero() {
 ```
 
 Add `className="dark"` (or `class="dark"` outside React) to an application root to enable the dark theme manually.
+
+## Component workbench
+
+Run Storybook to develop and test components in isolation:
+
+```bash
+npm run storybook
+```
+
+Open `http://localhost:6006`. Stories cover component variants, light and dark themes, accessibility checks, and interaction scenarios. Build the static Storybook with:
+
+```bash
+npm run build-storybook
+```
 
 ## UI examples
 
@@ -135,16 +151,17 @@ Complete props, live previews, and implementation examples are available at **[f
 | --- | --- |
 | Layout | `Container`, `Stack`, `Cluster`, `Grid`, `Navbar`, `Footer` |
 | Typography | `Heading`, `Text`, `Kicker`, `Highlight`, `HighlightHeading`, `SectionHeading` |
-| Actions and inputs | `Button`, `BracketButton`, `Select`, `LocaleSwitcher`, `ThemeToggle` |
-| Navigation | `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent` |
-| Surfaces and data | `Badge`, `CornerBox`, `PatternStrip`, `IconTile`, `IconList`, `StackedPanel`, `StaggeredList` |
+| Actions and inputs | `Button`, `BracketButton`, `Checkbox`, `Combobox`, `Switcher`, `Switch`, `ThemeToggle` |
+| Navigation | `Accordion`, `Breadcrumb`, `Carousel`, `Pagination`, `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent` |
+| Overlays and feedback | `Dialog`, `ToastProvider`, `useToast`, `Skeleton`, `Spinner` |
+| Surfaces and data | `Alert`, `Avatar`, `AvatarGroup`, `Badge`, `Calendar`, `CornerBox`, `DataTable`, `PatternStrip`, `Separator`, `IconTile`, `IconList`, `StackedPanel`, `StaggeredList` |
 | Code | `Code`, `CodeBlock` |
 | Motion | `Marquee`, `ScrollCrown` |
 | Theme | `ThemeProvider`, `ThemeToggle`, `useTheme` |
 
-The Select export also includes `SelectTrigger`, `SelectValue`, `SelectContent`, `SelectGroup`, `SelectLabel`, `SelectItem`, `SelectSeparator`, and scroll buttons. Stacked panels and staggered lists expose their corresponding content/item helpers. Buttons and badges share `default`, `outline`, `ghost`, and `destructive` visual variants.
+The Combobox export includes styled input, trigger, popup, list, item, indicator, group, empty-state, clear, and portal helpers. Stacked panels and staggered lists expose their corresponding content/item helpers. Buttons and badges share `default`, `outline`, `ghost`, and `destructive` visual variants.
 
-`CodeBlock` applies Fuse UI syntax colors to highlighted source and supports optional line numbers:
+`CodeBlock` applies Fuse UI syntax colors to highlighted source and includes a copy button. It also supports optional line numbers:
 
 ```tsx
 import { CodeBlock } from "@egoryolkin/fuse-ui"

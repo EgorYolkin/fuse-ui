@@ -29,7 +29,7 @@ function ThemeToggle({
   showLabel = false,
   className,
   onClick,
-  variant = "ghost",
+  variant,
   size,
   ...props
 }: ThemeToggleProps) {
@@ -42,7 +42,7 @@ function ThemeToggle({
   return (
     <Button
       type="button"
-      variant={variant}
+      variant={variant ?? (showLabel ? "ghost" : "outline")}
       size={size ?? (showLabel ? "default" : "icon")}
       className={cn("theme-toggle", className)}
       aria-label={accessibleLabel}

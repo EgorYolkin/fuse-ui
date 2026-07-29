@@ -6,9 +6,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-07-29
+
+### Added
+
+- Accordion, Alert, Avatar, Breadcrumb, Calendar, Carousel, Checkbox, Combobox, filterable DataTable, Dialog, Pagination, Separator, Skeleton, square Spinner, Switch, and Toast components.
+- Storybook workbench with light/dark previews, accessibility tooling, interaction scenarios, and isolated stories for the public component set.
+- A dedicated `Project / Changelog` view in Storybook.
+- Copy action and copied-state feedback for `CodeBlock`.
+
 ### Changed
 
+- Generalized `LocaleSwitcher` into `Switcher`; the old component and option type remain as deprecated aliases.
+- Simplified `StaggeredList` to stable vertical blocks without cascading offsets.
+- Reworked Spinner into one rotating square that morphs into a circle.
+- Upgraded Base UI and added React DayPicker and Embla Carousel runtime dependencies.
+- Added pointer cursors and refined focus, disabled, theme-toggle, and interactive surface states.
 - Pointed package and support documentation to [fuse-ui.egoryolkin.ru](https://fuse-ui.egoryolkin.ru).
+
+### Fixed
+
+- Removed the empty top block in populated Combobox popups.
+- Stabilized Accordion width while panels open and close.
+- Corrected icon geometry, Dialog action sizing, Alert title typography, and Separator dimensions.
+- Replaced the native DataTable search clear control with a Fuse-styled clear action.
+- Added image-based Avatar examples and visible horizontal and vertical Separator stories.
+- Made ScrollCrown interactive in Storybook and outlined the icon-only ThemeToggle.
+
+### Removed
+
+- Public `Select` and compound `Select*` exports. Use `Combobox` for filterable selection or `Switcher` for compact predefined options.
 
 ## [0.3.0] - 2026-07-26
 
@@ -54,7 +81,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Improved npm package metadata, declaration layout, release verification, and publish provenance.
 - Restored native page scrollbars instead of globally hiding them.
 
-[Unreleased]: https://github.com/EgorYolkin/fuse-ui/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/EgorYolkin/fuse-ui/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/EgorYolkin/fuse-ui/compare/v0.3.1...v0.4.0
+[0.3.1]: https://github.com/EgorYolkin/fuse-ui/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/EgorYolkin/fuse-ui/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/EgorYolkin/fuse-ui/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/EgorYolkin/fuse-ui/compare/f7db47f...v0.1.1
